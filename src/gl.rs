@@ -887,7 +887,7 @@ extern {
     pub fn glEGLImageTargetTexture2DOES(target: GLenum, image: GLeglImageOES);
 }
 
-#[cfg(target_os="android")]
+#[cfg(any(target_os="android",target_os="linux"))]
 pub fn egl_image_target_texture2d_oes(target: GLenum, image: GLeglImageOES) {
     unsafe {
         glEGLImageTargetTexture2DOES(target, image);
