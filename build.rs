@@ -12,7 +12,7 @@ fn main() {
     let mut file = BufWriter::new(File::create(&Path::new(&dest).join("gl_bindings.rs")).unwrap());
 
     let target = env::var("TARGET").unwrap();
-    if target.contains("android") {
+    if target.contains("android") || target.contains("linux") {
         // GLES 2.0 bindings for Android
         gl_generator::generate_bindings(gl_generator::StaticGenerator,
                                         gl_generator::registry::Ns::Gles2,

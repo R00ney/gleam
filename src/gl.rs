@@ -50,7 +50,7 @@ pub fn shader_source(shader: GLuint, strings: &[&[u8]]) {
     drop(pointers);
 }
 
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 pub fn read_buffer(mode: GLenum) {
     unsafe {
         ffi::ReadBuffer(mode);
@@ -60,11 +60,11 @@ pub fn read_buffer(mode: GLenum) {
 pub fn read_pixels(x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: GLenum, pixel_type: GLenum) -> Vec<u8> {
     let colors = match format {
         ffi::RGB => 3,
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
         ffi::BGR => 3,
 
         ffi::RGBA => 4,
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
         ffi::BGRA => 4,
 
         ffi::ALPHA => 1,
@@ -140,7 +140,7 @@ pub fn gen_textures(n: GLsizei) -> Vec<GLuint> {
     }
 }
 
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 #[inline]
 pub fn gen_vertex_arrays(n: GLsizei) -> Vec<GLuint> {
     unsafe {
@@ -150,7 +150,7 @@ pub fn gen_vertex_arrays(n: GLsizei) -> Vec<GLuint> {
     }
 }
 
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 #[inline]
 pub fn delete_vertex_arrays(vertex_arrays: &[GLuint]) {
     unsafe {
@@ -228,7 +228,7 @@ pub fn bind_buffer(target: GLenum, buffer: GLuint) {
     }
 }
 
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 #[inline]
 pub fn bind_vertex_array(vao: GLuint) {
     unsafe {
@@ -311,7 +311,7 @@ pub fn compressed_tex_sub_image_2d(target: GLenum,
 }
 
 // FIXME: Does not verify buffer size -- unsafe!
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 pub fn tex_image_3d(target: GLenum,
                     level: GLint,
                     internal_format: GLint,
@@ -361,7 +361,7 @@ pub fn copy_tex_sub_image_2d(target: GLenum,
 }
 
 #[inline]
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 pub fn copy_tex_sub_image_3d(target: GLenum,
                              level: GLint,
                              xoffset: GLint,
@@ -398,7 +398,7 @@ pub fn tex_sub_image_2d(target: GLenum,
     }
 }
 
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 pub fn tex_sub_image_3d(target: GLenum,
                         level: GLint,
                         xoffset: GLint,
@@ -458,7 +458,7 @@ pub fn framebuffer_texture_2d(target: GLenum,
 }
 
 #[inline]
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 pub fn framebuffer_texture_layer(target: GLenum,
                                  attachment: GLenum,
                                  texture: GLuint,
@@ -681,7 +681,7 @@ pub fn depth_mask(flag: bool) {
     }
 }
 
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 #[inline]
 pub fn depth_range(near: f64, far: f64) {
     unsafe {
@@ -711,7 +711,7 @@ pub fn get_attrib_location(program: GLuint, name: &str) -> c_int {
     }
 }
 
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 #[inline]
 pub fn get_frag_data_location(program: GLuint, name: &str) -> c_int {
     unsafe {
@@ -838,7 +838,7 @@ pub fn clear(buffer_mask: GLbitfield) {
     }
 }
 
-#[cfg(not(target_os="android"))]
+#[cfg(not(any(target_os="android", target_os="linux")))]
 #[inline]
 pub fn clear_depth(depth: f64) {
     unsafe {
