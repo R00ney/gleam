@@ -882,7 +882,7 @@ pub fn get_error() -> GLenum {
     }
 }
 
-#[cfg(target_os="android")]
+#[cfg(any(target_os="android",target_os="linux"))]
 extern {
     pub fn glEGLImageTargetTexture2DOES(target: GLenum, image: GLeglImageOES);
 }
